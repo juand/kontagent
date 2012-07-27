@@ -52,7 +52,7 @@ module Kontagent
     # @param [String]  st2                  - subtype 2 
     # @param [String]  st3                  - subtype 3
     #
-    def notify_event(facebook_user_id, event_name, value=nil, level_id=nil, st1=nil, st2=nil, st3=nil )
+    def notify_event(facebook_user_id, event_name, st1=nil, st2=nil, st3=nil, value=nil, level_id=nil )
       path = "/api/v1/#{api_key}/#{MESSAGES_TYPES[:custom_event]}/?s=#{facebook_user_id}"
       path += "&n=#{event_name}" unless event_name.nil?
       path += "&v=#{value}"      unless value.nil? 
