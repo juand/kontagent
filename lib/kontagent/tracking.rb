@@ -21,10 +21,11 @@ module Kontagent
     # @param [String] unique_tracking_tag
     # @param [String] short_tracking_tag
     # 
-    def notify_new_install(facebook_user_id, unique_tracking_tag=nil, short_tracking_tag=nil)    
+    def notify_install(facebook_user_id, opts = {})    
       path = "/api/v1/#{api_key}/#{MESSAGES_TYPES[:application_installed]}/?s=#{facebook_user_id}"
-      path += "&u=#{unique_tracking_tag}" unless unique_tracking_tag.nil?
-      path += "&su=#{short_tracking_tag}" unless short_tracking_tag.nil?    
+      path += "&u=#{opts[:unique_tracking_tag]}" if opts[:unique_tracking_tag]
+      path += "&su=#{opts[:short_tracking_tag]}" if opts[:short_tracking_tag]
+      path += "&d=#{opts[:device]}" if opts[:device]
       call_api(path)
     end
 
@@ -34,8 +35,9 @@ module Kontagent
     #
     # @param [String] facebook_user_id      - id of the facebook_user
     #  
-    def notify_uninstall(facebook_user_id)
+    def notify_uninstall(facebook_user_id, opts = {})
       path = "/api/v1/#{api_key}/#{MESSAGES_TYPES[:application_uninstalled]}/?s=#{facebook_user_id}"
+      path += "&d=#{opts[:device]}" if opts[:device]
       call_api(path)
     end
 
@@ -52,15 +54,15 @@ module Kontagent
     # @param [String]  st2                  - subtype 2 
     # @param [String]  st3                  - subtype 3
     #
-    def notify_event(facebook_user_id, event_name, st1=nil, st2=nil, st3=nil, value=nil, level_id=nil )
+    def notify_event(facebook_user_id, event_name, opts = {})
       path = "/api/v1/#{api_key}/#{MESSAGES_TYPES[:custom_event]}/?s=#{facebook_user_id}"
-      path += "&n=#{event_name}" unless event_name.nil?
-      path += "&v=#{value}"      unless value.nil? 
-      path += "&l=#{level_id}"   unless level_id.nil?    
-
-      path += "&s1=#{st1}"   unless st1.nil?    
-      path += "&s2=#{st2}"   unless st2.nil?    
-      path += "&s3=#{st3}"   unless st3.nil?                
+      path += "&n=#{event_name}"
+      path += "&v=#{opts[:value]}" if opts[:value]
+      path += "&l=#{opts[:level_id]}" if opts[:level_id]
+      path += "&st1=#{opts[:st1]}" if opts[:st1]
+      path += "&st2=#{opts[:st2]}" if opts[:st2]
+      path += "&st3=#{opts[:st3]}" if opts[:st3]
+      path += "&d=#{opts[:device]}" if opts[:device]
       call_api(path)
     end
     
