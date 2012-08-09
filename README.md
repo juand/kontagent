@@ -34,23 +34,23 @@ Usage
 
 If we want to notify API about new installation:
 <pre>
-<code>Kontagent::Tracking.notify_new_install(facebook_id)</code>
+<code>Kontagent::Tracking.notify_new_install(user_id)</code>
 </pre>
 
 in the same manner we can quickly notify application removal
 <pre>
-<code>Kontagent::Tracking.notify_uninstall(facebook_id)</code>
+<code>Kontagent::Tracking.notify_uninstall(user_id)</code>
 </pre>
 
 On top of these two predefined events we can a call custom one:
 <pre>
-<code>Kontagent::Tracking.notify_custom_event(facebook_user_id, event_name, value, level_id, st1=nil, st2=nil, st3=nil)</code>
+<code>Kontagent::Tracking.notify_custom_event(user_id, event_name, value, level_id, st1=nil, st2=nil, st3=nil)</code>
 </pre> 
 
 	
 Notice how it takes different arguments, their meanings are:
 
-* facebook_user_id     - id of the facebook_user
+* user_id     - id of the user
 * event_name           - name of the event
 * value                - value of the event
 * level_id             - if of level (ie. for a game)
