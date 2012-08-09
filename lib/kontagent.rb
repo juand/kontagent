@@ -1,9 +1,9 @@
 module Kontagent
-  def logger=(l)
+  def self.logger=(l)
     @logger = l
   end
   
-  def logger
+  def self.logger
     @logger
   end  
 end
