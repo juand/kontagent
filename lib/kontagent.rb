@@ -1,7 +1,14 @@
-module Kontagent; end
+module Kontagent
+  def logger=(l)
+    @logger = l
+  end
+  
+  def logger
+    @logger
+  end  
+end
 
 require "kontagent/version"
-require "kontagent/logger"
 require "kontagent/messages"
 require "kontagent/tracking"
 require "kontagent/client"
