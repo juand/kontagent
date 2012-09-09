@@ -51,6 +51,25 @@ module Kontagent
       call_api(path)
     end
     
+    # This method allows us to track custom events 
+    #
+    # @see messages.rb for all the possible events or check the kontagent rest api
+    # @see http://developers.kontagent.com/getting-started/instrumenting-your-application/kontagent-rest-api/events
+    #
+    # @param [String]  user_id     - id of the user
+    # @param [String][opts]  b     - Birth Year
+    # @param [String][opts]  g     - Gender
+    # @param [String][opts]  lc    - Country
+    # @param [String][opts]  ls    - State
+    # @param [String][opts]  f     - Friend Count
+    # @param [String][opts]  d     - Device Model
+    #
+    def notify_information(user_id, opts = {})
+      path = "/api/v1/#{api_key}/#{MESSAGES_TYPES[:user_information]}/?s=#{user_id}"
+      path += opts.to_query
+      call_api(path)
+    end
+    
     # We only need user_id 
     # More details for usage of the params can be found here:    
     # http://developers.kontagent.com/getting-started/instrumenting-your-application/kontagent-rest-api/application-uninstalled
