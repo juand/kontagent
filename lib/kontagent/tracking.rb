@@ -118,11 +118,19 @@ module Kontagent
       @dial_out = Proc.new { |var| type ? secure_call_api(var) : simple_call_api(var) }
     end
     
+    def process(url)
+      @dial_out.call(url)
+    end
+    
     private
     
     def call_api(path)
       path += "&ts=#{Time.now.to_i}"
-      @dial_out.call(path)
+      if @delayed
+        BackgroundInterface.enqueue_without_priority(Kontagent, 'process', path)
+      else
+        @dial_out.call(path)
+      end
     end
     
     def simple_call_api(path)
@@ -145,6 +153,5 @@ module Kontagent
       Kontagent.logger.debug "[#{Time.now.to_s}][Kontagent Response] #{response.code}: #{response.body}" if debug_mode
       response
     end
-    
   end
 end

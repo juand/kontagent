@@ -14,6 +14,7 @@ module Kontagent
       @api_key = opts[:api_key]
       @base_url = @test_mode || opts[:base_url].nil? ? TEST_SERVER : opts[:base_url]
       @debug_mode = opts[:debug_mode]
+      @delayed = opts[:delayed]
       set_call(opts[:secure])
     end
     

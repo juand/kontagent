@@ -5,7 +5,11 @@ module Kontagent
   
   def self.logger
     @logger
-  end  
+  end
+  
+  def self.process(url)
+    Kontagent::Client.process(url)
+  end
 end
 
 Kontagent.logger = Logger.new(STDOUT)
