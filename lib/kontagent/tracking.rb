@@ -65,7 +65,7 @@ module Kontagent
     # @param [String][opts]  d     - Device Model
     #
     def notify_information(user_id, opts = {})
-      path = "/api/v1/#{api_key}/#{MESSAGES_TYPES[:user_information]}/?s=#{user_id}"
+      path = "/api/v1/#{api_key}/#{MESSAGES_TYPES[:user_information]}/?s=#{user_id}&"
       path += opts.to_query
       call_api(path)
     end
