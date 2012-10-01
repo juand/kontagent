@@ -19,3 +19,5 @@ require "kontagent/messages"
 require "kontagent/tracking"
 require "kontagent/client"
 require "kontagent/railtie" if defined?(Rails)
+require "kontagent/sidekiq_worker" if defined?(Sidekiq)
+require "kontagent/resque_worker" if defined?(Resque)

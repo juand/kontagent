@@ -126,8 +126,9 @@ module Kontagent
     
     def call_api(path)
       path += "&ts=#{Time.now.to_i}"
-      if @delayed
-        BackgroundInterface.enqueue_without_priority(Kontagent, 'process', path)
+      case @delayed
+      when :resque then Resque.enqueue(Kontagent::ResqueWorker, path)
+      when :sidekiq then SidekiqWorker.perform_async(path)
       else
         @dial_out.call(path)
       end
