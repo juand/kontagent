@@ -19,5 +19,20 @@ require "kontagent/messages"
 require "kontagent/tracking"
 require "kontagent/client"
 require "kontagent/railtie" if defined?(Rails)
-require "kontagent/sidekiq_worker" if defined?(Sidekiq)
-require "kontagent/resque_worker" if defined?(Resque)
+
+has_sidekiq = begin
+  require 'sidekiq'
+  true
+rescue LoadError
+  false
+end
+require "kontagent/sidekiqworker" if has_sidekiq
+
+
+has_resque = begin
+  require 'resque'
+  true
+rescue LoadError
+  false
+end
+require "kontagent/resqueworker" if has_resque

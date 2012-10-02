@@ -1,5 +1,5 @@
 module Kontagent
-  class SidekiqWorker
+  class Sidekiqworker
     include Sidekiq::Worker
     sidekiq_options :queue => :Kontagent
   

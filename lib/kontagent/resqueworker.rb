@@ -1,5 +1,5 @@
 module Kontagent
-  class ResqueWorker
+  class Resqueworker
     @queue = 'Kontagent'
   
     def self.queue=(type)
