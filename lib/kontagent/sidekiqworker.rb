@@ -1,7 +1,7 @@
 module Kontagent
   class Sidekiqworker
     include Sidekiq::Worker
-    sidekiq_options :queue => :Kontagent
+    sidekiq_options :queue => :kontagent
   
     def perform(path)
       Kontagent.process(path)

@@ -1,3 +1,3 @@
 module Kontagent
-  VERSION = "0.0.8.2.4"
+  VERSION = "0.0.9"
 end
